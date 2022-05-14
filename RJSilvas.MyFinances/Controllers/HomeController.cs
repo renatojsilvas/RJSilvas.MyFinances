@@ -4,7 +4,9 @@ using RJSilvas.MyFinances.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace RJSilvas.MyFinances.Controllers
@@ -20,7 +22,10 @@ namespace RJSilvas.MyFinances.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("pt-BR");
+            Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("pt-BR");
+
+            return View(Startup.Account);
         }
 
         public IActionResult Privacy()
@@ -33,5 +38,6 @@ namespace RJSilvas.MyFinances.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
     }
 }

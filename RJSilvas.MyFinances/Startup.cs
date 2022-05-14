@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RJSilvas.MyFinances.Data;
+using RJSilvas.MyFinances.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace RJSilvas.MyFinances
 {
     public class Startup
     {
+        public static Account Account = new Account();
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;

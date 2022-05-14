@@ -1,8 +1,42 @@
-﻿@{
+﻿@model Account
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome Renato</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Welcome @Model.Name</h1>
+    <p class="display-6 text-left font-weight-bold">Name: @Model.Type</p>
+    <p class="display-6 text-left font-weight-bold">Amount: R$ @Model.Amount.ToString("0.00")</p>
+    <button type="button" class="btn btn-primary float-right" onclick="window.location='@Url.Action("NewTransaction", "Transaction")'">Add new transaction</button>
+    <p class="display-6 text-left font-weight-bold">Transaction list</p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Date</th>
+                <th scope="col">Category</th>
+                <th scope="col">Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var transaction in Model.Transactions)
+            {
+                <tr>
+                    <th scope="row">@transaction.Id</th>
+                    <td>@transaction.Date.ToShortDateString()</td>
+                    <td>@transaction.Category</td>
+                    @if (transaction.Value < 0)
+                    {
+                        var value = -transaction.Value;
+                        <td>-R$ @value.ToString("0.00")</td>
+                    }
+                    else
+                    {
+                        <td>R$ @transaction.Value.ToString("0.00")</td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+
 </div>
